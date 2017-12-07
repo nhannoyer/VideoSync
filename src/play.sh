@@ -15,7 +15,7 @@ else
     var=$(echo "0$var")
   fi
 if ["$var" -lt 0]; then
-    ffplay -ss $var $1 | ffplay $2
+    ffplay -ss "0$var" $1 | ffplay $2
   else
    ffplay $1 | ffplay -ss "0$var" $2
   fi
