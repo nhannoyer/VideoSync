@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>File Uploader</title>
+  <link href="css/display.css" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <h1>Synchro in the wild</h1>
+  </header>
+
+  <section>
+    <td>
+    <div class="g_video">
+      <h2>Glasses Video</h2>
+      <button class="btn btn-lg g-upload-btn" type="button">Upload</button>
+      <input id="g-upload-input" type="file" name="uploads[]" multiple="multiple"></br>
+
+    </div>
+  </td>
+  <td>
+    <div class="l_video">
+      <h2>Left Video</h2>
+      <button class="btn btn-lg l-upload-btn" type="button">Uplaod</button>
+      <input id="l-upload-input" type="file" name="uploads[]" multiple="multiple"></br>
+    </div>
+  </td>
+  <td>
+    <div class="r_video">
+      <h2>Right Video</h2>
+      <button class="btn btn-lg r-upload-btn" type="button">Upload</button>
+      <input id="r-upload-input" type="file" name="uploads[]" multiple="multiple"></br>
+    </div>
+  </td>
+  <td>
+    <div class="ffmpeg">
+      <h2>Get synchro information from 3 videos</h2>
+      <form action="/" method="post">
+        <button class="btn btn-lg ffmep-btn">Get information</button>
+      </form>
+    </div>
+  </td>
+  </section>
+
+  <footer>
+
+      <button id="preview" onclick="location.href='/synchro';">Start videos</button>
+
+  </footer>
+  <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+  <script src="javascript/upload.js"></script>
+
+
+</body>
+</html>
