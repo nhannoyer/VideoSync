@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>File Uploader</title>
+  <link href="css/display.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="container">
+            <h2>Right Video</h2>
+            <button class="btn btn-lg r-upload-btn" type="button">Upload</button>
+            <input id="r-upload-input" type="file" name="uploads[]" multiple="multiple"></br>
+
+            <h2>Left Video</h2>
+            <button class="btn btn-lg l-upload-btn" type="button">Uplaod</button>
+            <input id="l-upload-input" type="file" name="uploads[]" multiple="multiple"></br>
+
+            <h2>Glasses Video</h2>
+            <button class="btn btn-lg g-upload-btn" type="button">Upload</button>
+            <input id="g-upload-input" type="file" name="uploads[]" multiple="multiple"></br>
+
+  </div>
+
+  <div class="form">
+            <h2>calculate with ffmpeg</h2>
+            <form action="/" method="post">
+              <button>ffmpeg</button>
+            </form>
+  </div>
+
+  <div class="container">
+            <h2>Select synchronization point</h2>
+            <a href="/synchro"> select</a>
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+  <script src="javascript/upload.js"></script>
+</body>
+</html>

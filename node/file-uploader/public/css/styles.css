@@ -1,0 +1,67 @@
+.btn:focus, .r-upload-btn:focus, .l-upload-btn:focus, .g-upload-btn:focus,{
+  outline: 0 !important;
+}
+
+html,
+body {
+  height: 100%;
+  background-color: #4791D2;
+}
+
+body {
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+}
+
+.r-upload-btn:hover,
+.r-upload-btn:focus,
+.r-upload-btn:active,
+.r-upload-btn.active {
+  color: #ffffff;
+  border: none;
+}
+
+.l-upload-btn:hover,
+.l-upload-btn:focus,
+.l-upload-btn:active,
+.l-upload-btn.active {
+  color: #ffffff;
+  border: none;
+}
+
+.g-upload-btn:hover,
+.g-upload-btn:focus,
+.g-upload-btn:active,
+.g-upload-btn.active {
+  color: #ffffff;
+  border: none;
+}
+
+h2 {
+  margin-top: 15px;
+  color: #68757E;
+}
+
+#r-upload-input {
+  display: none;
+}
+
+#l-upload-input {
+  display: none;
+}
+
+#g-upload-input {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .main-container {
+    width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 450px;
+  }
+}
