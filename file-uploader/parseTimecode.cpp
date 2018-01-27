@@ -3,9 +3,9 @@
 #include <fstream>
 #include "parseTimecode.h"
 
-InfoVideo::InfoVideo(char * videoName)
+InfoVideo::InfoVideo(char * fileName)
 {
-  _videoName=videoName;
+  _fileName=fileName;
   _delay=0;
   _frameRate = 0;
 }
@@ -15,8 +15,8 @@ void saveData(InfoVideo * g,InfoVideo * r,InfoVideo * l, int fnbd)
   std::string data;
   std::ofstream file;
   file.open("public/data.xml");
-  data = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><current_observation>";
-  data += "<video_name>" + g->getName() + "</video_name>\n";
+  data = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<current_observation>\n";
+  data += "<videoName>" + g->getName() + "</videoName>\n";
   data += "<duration_g>" + g->getDuration() + "</duration_g>\n";
   data += "<timecode_g>" + g->getTimeCode() + "</timecode_g>\n";
   data += "<frameRate_g>" + std::to_string(g->getFrameRate()) + "</frameRate_g>\n";
@@ -39,7 +39,7 @@ void saveData(InfoVideo * g,InfoVideo * r,InfoVideo * l, int fnbd)
 
 void InfoVideo::parse()
 {
-  std::ifstream file(this->_videoName);
+  std::ifstream file(this->_fileName);
   if (!file)
   {
     std::cerr << "file not open" << '\n';
@@ -47,6 +47,8 @@ void InfoVideo::parse()
   }
 
   std::string lines;
+  std::string name;
+  name.reserve(20);
   std::string t;
   t.reserve(11);
   std::string d;
@@ -55,6 +57,21 @@ void InfoVideo::parse()
   fr.reserve(5);
   while (file) {
     file >> lines;
+    if (lines == "from")
+    {
+      file >> name;
+      int posBegin = name.find('/')+1;
+      while (1)
+          {
+            int test = name.find('/',posBegin);
+            if (test == -1)
+              break;
+            else
+              posBegin = test+1;
+            }
+      int posEnd = name.find('\'',1);
+      name = name.substr(posBegin,posEnd-posBegin);
+    }
     if (lines == "timecode")
     {
       file >> t;
@@ -71,6 +88,7 @@ void InfoVideo::parse()
     }
   }
   file.close();
+  _videoName = name;
   _timecode = t;
   _frameRate = std::stof(fr);
   _duration = d;

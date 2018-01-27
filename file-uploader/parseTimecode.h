@@ -5,7 +5,7 @@
 class InfoVideo
 {
 public:
-  InfoVideo(char * videoName);
+  InfoVideo(char * fileName);
   void parse();
   float getDelay() {return _delay;}
   void setDelay(float delay){_delay=delay;}
@@ -16,8 +16,9 @@ public:
 
 
 private:
-  char * _videoName;
+  char * _fileName;
   float _delay;
+  std::string _videoName;
   std::string _timecode;
   std::string _duration;
   float _frameRate;
