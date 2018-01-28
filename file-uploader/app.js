@@ -12,6 +12,9 @@ app.get('/', function(req, res){
 });
 
 app.get('/synchro', function(req, res){
+  const spawn = require('child_process').spawn;
+  const shinfo = spawn('sh',['info.sh', 'public/uploads/Rvideo.mp4', 'public/uploads/Lvideo.mp4', 'public/uploads/Gvideo.mp4']);
+
   res.sendFile(path.join(__dirname, 'views/player.html'));
 });
 
@@ -49,30 +52,6 @@ app.post('/upload', function(req, res){
 
 });
 
-app.post('/',function(req,res){
-
-  'use strict';
-
-  console.log('Starting');
-  const child_process = require('child_process');
-  console.log('exec info.sh');
-  const process = child_process.exec('./info.sh public/uploads/Rvideo.mp4 public/uploads/Lvideo.mp4 public/uploads/Gvideo.mp4');
-  process.on('exit', () => {
-    console.log('process exit');
-  });
-  process.stdout.on('data', (data) => {
-    console.log('Output: ' + data.toString('utf8'));
-  });
-
-/*
-      var parser = new xml2js.Parser();
-      fs.readFile('./data.xml', function(err, data) {
-          parser.parseString(data, function (err, result) {
-              console.dir(result);
-              console.log('Done');
-          });
-        });*/
-})
 
 
 var server = app.listen(8080, function(){

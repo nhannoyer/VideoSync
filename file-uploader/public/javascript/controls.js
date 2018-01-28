@@ -219,32 +219,32 @@ function loadXML(){
 	        readXML(this);
 	    }
 	};
-	
-	//xhttp.open("GET", "data.xml", true);
-	xhttp.open("GET", "../public/data.xml", true);
+
+	xhttp.open("GET", "data.xml", true);
+	//xhttp.open("GET", "../public/data.xml", true);
 	xhttp.send();
-	readXML(xhttp);
+//	readXML(xhttp);
 }
 
-function readXML(){
+function readXML(xml){
 	var data = xml.responseXML;
-	localStorage.setItem('frameTimeT', 1/( data.getElementsByTagName('frameRate_g')[0] ));
-	localStorage.setItem('frameTimeGP', 1/( data.getElementsByTagName('frameRate_l')[0] ));
-	localStorage.setItem('videoID', data.getElementsByTagName('video_name')[0]);
-	localStorage.setItem('delayRL',data.getElementsByTagName('delayRL'));
+	localStorage.setItem('frameTimeT', 1/( data.getElementsByTagName('current_observation')[0].getElementsByTagName('frameRate_g')[0].childNodes[0].nodeValue ));
+	localStorage.setItem('frameTimeGP', 1/( data.getElementsByTagName('current_observation')[0].getElementsByTagName('frameRate_l')[0].childNodes[0].nodeValue ));
+	localStorage.setItem('videoID', data.getElementsByTagName('current_observation')[0].getElementsByTagName('videoName')[0].childNodes[0].nodeValue);
+	localStorage.setItem('delayRL',data.getElementsByTagName('current_observation')[0].getElementsByTagName('delayRL')[0].childNodes[0].nodeValue);
 }
 
 
 //save the informations needed
 function save(){
 
-	
+
 	var frameRateT = 1/localStorage.getItem('frameTimeT');
-	var frameRateGP = 1/localStorage.getItem('frameTimeGP');	
-	var synch_frame_R = localStorage.getItem('sync_frame_GP') + localStorage.getItem('delayRL');
-	var start_frame_R = localStorage.getItem('start_frame_GP') + localStorage.getItem('delayRL');
+	var frameRateGP = 1/localStorage.getItem('frameTimeGP');
+	var synch_frame_R = parseInt(localStorage.getItem('sync_frame_GP')) + parseInt(localStorage.getItem('delayRL'));
+	var start_frame_R = parseInt(localStorage.getItem('start_frame_GP')) + parseInt(localStorage.getItem('delayRL'));
 	get_start_frames();
-	
+
 	var xmltext = "<informations><videoID>"+ localStorage.getItem('videoID') +" </videoID><frame_rate_G>" +
 		frameRateT + "</frame_rate_G><synch_frame_G>" +
 		localStorage.getItem('sync_frame_T') + "</synch_frame_G><start_frame_G>" +
@@ -256,11 +256,11 @@ function save(){
 		synch_frame_R + "</synch_frame_R><start_frame_R>" +
 		start_frame_R + "</start_frame_R></informations>";
 
-	
 
-	
+
+
 	var bb = new Blob([xmltext], {type: 'text/plain'});
-	
+
 	var pom = document.createElement('a');
 	pom.setAttribute('href', window.URL.createObjectURL(bb));
 	pom.setAttribute('download', localStorage.getItem('videoID')+"_synchro.xml");
@@ -271,8 +271,8 @@ function save(){
 	pom.click();
 
 	document.body.removeChild(pom);
-	
-	
+
+
 	/*
 	  var pom = document.createElement('a');
 	  pom.setAttribute('href', 'data:text/plain;charset=utf-8,' +
@@ -289,5 +289,3 @@ function save(){
 	  document.body.removeChild(pom);
 	  */
 }
-
-

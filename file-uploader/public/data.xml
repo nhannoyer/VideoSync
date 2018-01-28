@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><current_observation><video_name>GtimeCode.txt</video_name>
+<?xml version="1.0" encoding="UTF-8"?>
+<current_observation>
+<videoName>Gvideo.mp4</videoName>
 <duration_g>00:00:07.84</duration_g>
 <timecode_g></timecode_g>
 <frameRate_g>25.129999</frameRate_g>
@@ -8,5 +10,5 @@
 <duration_l>00:00:09.18</duration_l>
 <timecode_l>03:37:34:21</timecode_l>
 <frameRate_l>59.939999</frameRate_l>
-<diffNBframe_R-L>68</delayRL>
+<delayRL>68</delayRL>
 </current_observation>
