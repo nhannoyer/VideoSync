@@ -4,71 +4,80 @@
 <head>
 	<meta charset="utf8">
 	<title>VideoPlayer</title>
-
+<!-- 
 	<script type="text/javascript" src="javascript/controls.js"></script>
 	<link rel="stylesheet" href="css/display.css">
-	 <!--
+	 -->
 	 <script type="text/javascript" src="../public/javascript/controls.js"></script>
 	<link rel="stylesheet" href="../public/css/display.css">
--->
+
 </head>
 
 <body>
 
 <header>
-	<h1>Preview</h1>
+	<div id="title"><h1>Preview</h1></div>
+	<!-- 
+	<div id="logo"><img src="css/button/logo.png" alt="logo"></div>
+	 -->
+	<div id="logo"><img src="../public/css/button/logo.png" alt="logo"></div>
 </header>
 
 <div id="sections">
 <section>
 	<video id="videoT">
+	<!-- 
 		<source src="uploads/Gvideo.mp4" type="video/mp4">
-<!--
-		 <source src="../public/uploads/Gvideo.mp4" type="video/mp4">-->
+-->
+		 <source src="../public/uploads/Gvideo.mp4" type="video/mp4">
 	</video>
+</section>
+
+
+
+<section><!--  GoPro -->
+	<video id="videoGP">
+	<!-- 
+		<source src="uploads/Lvideo.mp4" type="video/mp4">
+-->
+		<source src="../public/uploads/Lvideo.mp4" type="video/mp4">
+	</video>
+
 </section>
 
 <script type="text/javascript">
 	var videoT = document.getElementById("videoT");
+	var videoGP = document.getElementById("videoGP");
 	//updates the current frame counter
 	videoT.ontimeupdate = function(){
-			document.getElementById("current_frame_T").innerHTML = Math.round(videoT.currentTime/frameTimeT);
-			document.getElementById("slidebar_T").value = Math.round(videoT.currentTime/videoT.duration*100);
+			document.getElementById("current_frame_T").innerHTML = Math.round(videoT.currentTime/localStorage.getItem('frameTimeT'));
+			if((videoT.paused && videoT.currentTime==videoT.duration) || (videoGP.paused && videoGp.currentTime==videoGP.duration)){ //stop videos if one has ended
+				preview_stop();
+			}
 	};
 
 </script>
-
-<section><!--  GoPro -->
-	<video id="videoGP">
-		<source src="uploads/Lvideo.mp4" type="video/mp4">
-<!--
-		<source src="../public/uploads/Lvideo.mp4" type="video/mp4">-->
-	</video>
-
-</section>
 
 <div id="preview_controls">
 	<div id="general_controls">
 		<button id="play" onclick="preview_play();;"></button>
 		<button id="pause" onclick="pause(1);pause(2);"></button>
 		<button id="stop" onclick="preview_stop();"></button>
-		<button id="previous" onclick="previous_frame(1);previous_frame(2);"></button>
-		<button id="next" onclick="next_frame(1);next_frame(2);"></button>
-
+		<button id="previous" onclick="previous_frame(3);"></button>
+		<button id="next" onclick="next_frame(3);"></button>
 		Frame : <span id="current_frame_T">0</span>
-		<input id="slidebar_T" type="range" min="0" max="100" value="0" onchange="update_frame(1)">
 	</div>
 </div>
 
 </div>
 
 <footer>
-
+<!-- 
 	<button id="save" onclick="save(); location.href = '/synchro';">Save</button>
 	<button id="cancel" onclick="location.href = '/synchro';">Cancel</button>
-<!--
+-->
 	 <button id="save" onclick="save(); location.href = 'player.html';">Save</button>
-	 <button id="cancel" onclick="location.href = 'player.html';">Cancel</button>-->
+	 <button id="cancel" onclick="location.href = 'player.html';">Cancel</button>
 </footer>
 
 

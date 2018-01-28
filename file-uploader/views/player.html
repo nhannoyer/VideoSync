@@ -4,18 +4,22 @@
 <head>
 	<meta charset="utf8">
 	<title>VideoPlayer</title>
-
+<!-- 
 	<script type="text/javascript" src="javascript/controls.js"></script>
 	<link rel="stylesheet" href="css/display.css">
-	<!--
+	-->
 	 <script type="text/javascript" src="../public/javascript/controls.js"></script>
-	<link rel="stylesheet" href="../public/css/display.css">-->
+	<link rel="stylesheet" href="../public/css/display.css">
 </head>
 
 <body onload="loadXML(); set_sync_frames();">
 
 <header>
-	<h1>videoID:</h1>
+	<div id="title"><h1>VideoID:<span id="videoID"></span></h1></div>
+	<!-- 
+	<div id="logo"><img src="css/button/logo.png" alt="logo"></div>
+	 -->
+	<div id="logo"><img src="../public/css/button/logo.png" alt="logo"></div>
 </header>
 
 <div id="sections">
@@ -23,16 +27,17 @@
 <h1>Glasses</h1>
 <video id="videoT">
 
+<!-- 
 	<source src="uploads/Gvideo.mp4" type="video/mp4">
-	<!--
-	 <source src="../public/uploads/Gvideo.mp4" type="video/mp4">-->
+-->
+	 <source src="../public/uploads/Gvideo.mp4" type="video/mp4">
 </video>
 
 <script type="text/javascript">
 	var videoT = document.getElementById("videoT");
 	//updates the current frame counter
 	videoT.ontimeupdate = function(){
-			document.getElementById("current_frame_T").innerHTML = Math.round(videoT.currentTime/frameTimeT);
+			document.getElementById("current_frame_T").innerHTML = Math.round(videoT.currentTime/localStorage.getItem('frameTimeT'));
 			document.getElementById("slidebar_T").value = Math.round(videoT.currentTime/videoT.duration*100);
 	};
 
@@ -64,17 +69,17 @@
 <section><!-- GoPro video section  -->
 <h1>GoPro</h1>
 <video id="videoGoPro">
-
+<!-- 
 	<source src="uploads/Lvideo.mp4" type="video/mp4">
-<!--
-	<source src="../public/uploads/Lvideo.mp4" type="video/mp4">-->
+-->
+	<source src="../public/uploads/Lvideo.mp4" type="video/mp4">
 </video>
 
 <script type="text/javascript">
 	var videoGP = document.getElementById("videoGoPro");
 	//updates the current frame counter
 	videoGP.ontimeupdate = function(){
-		document.getElementById("current_frame_GP").innerHTML = Math.round(videoGP.currentTime/frameTimeGP);
+		document.getElementById("current_frame_GP").innerHTML = Math.round(videoGP.currentTime/localStorage.getItem('frameTimeGP'));
 		document.getElementById("slidebar_GP").value = Math.round(videoGP.currentTime/videoGP.duration*100);
 	};
 </script>
@@ -109,22 +114,23 @@
 
 
 <footer><!-- Save button section  -->
-
+<!-- 
 	<button id="back_home" onclick="location.href='/';">Home</button>
 	<button id="save" onclick="save();">Save</button>
 	<button id="preview" onclick=" location.href='/preview';">Preview</button>
-	 <!--
-	 <button id="back_home" onclick="location.href='upload.html';">Home</button>
+	 -->
+	<button id="back_home" onclick="reset(); location.href='upload.html';">Home</button>
 	<button id="save" onclick=" save();">Save</button>
-	<button id="preview" onclick=" location.href='preview.html';">Preview</button>-->
+	<button id="preview" onclick=" location.href='preview.html';">Preview</button>
 </footer>
 
 
+<!-- 
 <script type="text/javascript">
 	document.getElementById("sync_frame_T").innerHTML = localStorage.getItem('sync_frame_T');
 	document.getElementById("sync_frame_GP").innerHTML = localStorage.getItem('sync_frame_GP');
 </script>
-
+-->
 
 </body>
 </html>

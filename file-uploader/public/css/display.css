@@ -21,6 +21,18 @@ section{
 	min-width : 800px;
 }
 
+header{
+	display:flex;
+	justify-content:space-between;
+}
+
+#logo img{
+	width : 510px;
+	height : 100px;
+	border : solid rgb(100,100,100);
+	
+}
+
 footer{
 	display:flex;
 	justify-content : center;
@@ -33,6 +45,7 @@ footer{
 #general_controls{
 	display : flex;
 	border-style : solid;
+	border-color : rgb(100,100,100);
 	align-items : center;
 }
 #sync_controls{
@@ -68,23 +81,34 @@ button{
 }
 
 #sync_controls button{
-	height: 60px;
+	height: 40px;
 	width: 80px;
-	padding: 0;
-	margin: 5px;
-	border-style : solid;
-	border-color : black;
-	background-color : rgb(200,200,200);
+	margin: 2px;
+	margin-top : 5px;
+	
+	border:none;
+	padding:6px 0 6px 0;
+	border-radius:2px;
+	box-shadow:2px 2px 5px #000;
+	background:rgb(200,200,200);
+	font:bold 13px Arial;
+	color:#444;
 }
 
+
 footer button{
-	height: 60px;
+	height: 40px;
 	width: 80px;
-	padding: 0;
-	margin: 5px;
-	border-style : solid;
-	border-color : black;
-	background-color : rgb(200,200,200);
+	margin: 2px;
+	margin-top : 5px;
+	
+	border:none;
+	padding:6px 0 6px 0;
+	border-radius:2px;
+	box-shadow:2px 2px 5px #000;
+	background:rgb(200,200,200);
+	font:bold 13px Arial;
+	color:#444;
 
 }
 
