@@ -116,14 +116,14 @@ function preview_play(){
 			if(sync_time_T > sync_time_GP){
 				videoT.currentTime = sync_time_T - sync_time_GP;
 				videoGP.currentTime = 0;
-				localStorage.setItem('start_frame_T', (sync_time_T - sync_time_GP)/frameTimeT);
+				localStorage.setItem('start_frame_T', Math.round((sync_time_T - sync_time_GP)/frameTimeT));
 				localStorage.setItem('start_frame_GP', 0);
 			}
 			else{
 				videoT.currentTime = 0;
 				videoGP.currentTime = sync_time_GP - sync_time_T;
 				localStorage.setItem('start_frame_T', 0);
-				localStorage.setItem('start_frame_GP', (sync_time_GP - sync_time_T)/frameTimeGP);
+				localStorage.setItem('start_frame_GP', Math.round((sync_time_GP - sync_time_T)/frameTimeGP));
 			}
 		}
 		play(1);
@@ -198,28 +198,82 @@ function update_frame(v_index){
 }
 
 
-//save the sync point
-function save(){
-	/*
-	var txtFile = "sync_frames.txt";
-	var file = new File([""],txtFile);
+function get_start_frames(){
+	var sync_time_T = localStorage.getItem('sync_frame_T') * frameTimeT;
+	var sync_time_GP = localStorage.getItem('sync_frame_GP') * frameTimeGP;
+	if(sync_time_T > sync_time_GP){
+		localStorage.setItem('start_frame_T', Math.round((sync_time_T - sync_time_GP)/frameTimeT));
+		localStorage.setItem('start_frame_GP', 0);
+	}
+	else{
+		localStorage.setItem('start_frame_T', 0);
+		localStorage.setItem('start_frame_GP', Math.round((sync_time_GP - sync_time_T)/frameTimeGP));
+	}
+}
 
-	file.open("w");
-	file.writeln(document.getElementById("sync_frame_T").innerHTML);
-	file.writeln(document.getElementById("sync_frame_GP").innerHTML);
-	file.close();
-	*/
+
+function loadXML(){
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	        readXML(this);
+	    }
+	};
+	
+	//xhttp.open("GET", "data.xml", true);
+	xhttp.open("GET", "../public/data.xml", true);
+	xhttp.send();
+	readXML(xhttp);
+}
+
+function readXML(){
+	var data = xml.responseXML;
+	localStorage.setItem('frameTimeT', 1/( data.getElementsByTagName('frameRate_g')[0] ));
+	localStorage.setItem('frameTimeGP', 1/( data.getElementsByTagName('frameRate_l')[0] ));
+	localStorage.setItem('videoID', data.getElementsByTagName('video_name')[0]);
+	localStorage.setItem('delayRL',data.getElementsByTagName('delayRL'));
+}
+
+
+//save the informations needed
+function save(){
+
+	
+	var frameRateT = 1/localStorage.getItem('frameTimeT');
+	var frameRateGP = 1/localStorage.getItem('frameTimeGP');	
+	var synch_frame_R = localStorage.getItem('sync_frame_GP') + localStorage.getItem('delayRL');
+	var start_frame_R = localStorage.getItem('start_frame_GP') + localStorage.getItem('delayRL');
+	get_start_frames();
+	
+	var xmltext = "<informations><videoID>"+ localStorage.getItem('videoID') +" </videoID><frame_rate_G>" +
+		frameRateT + "</frame_rate_G><synch_frame_G>" +
+		localStorage.getItem('sync_frame_T') + "</synch_frame_G><start_frame_G>" +
+		localStorage.getItem('start_frame_T') + "</start_frame_G><frame_rate_L>" +
+		frameRateGP + "</frame_rate_L><synch_frame_L>" +
+		localStorage.getItem('sync_frame_GP') + "</synch_frame_L><start_frame_L>" +
+		localStorage.getItem('start_frame_GP') + "</start_frame_L><frame_rate_R>" +
+		frameRateGP + "</frame_rate_R><synch_frame_R>" +
+		synch_frame_R + "</synch_frame_R><start_frame_R>" +
+		start_frame_R + "</start_frame_R></informations>";
+
+	
+
+	
+	var bb = new Blob([xmltext], {type: 'text/plain'});
+	
+	var pom = document.createElement('a');
+	pom.setAttribute('href', window.URL.createObjectURL(bb));
+	pom.setAttribute('download', localStorage.getItem('videoID')+"_synchro.xml");
+
+	pom.style.display = 'none';
+	document.body.appendChild(pom);
+
+	pom.click();
+
+	document.body.removeChild(pom);
+	
+	
 	/*
-	var fd = fopen("sync_frames.txt");
-	fwrite(fd, document.getElementById("sync_frame_T").innerHTML);
-	fclose(fd);
-	*/
-	/*
-	 set fso = new ActiveXObject("Scripting.FileSystemObject");
-	 set s = fso.CreateTextFile("sync_frames.txt", True);
-	 s.writeline(document.getElementById("sync_frame_T").innerHTML);
-	 s.Close();
-	 */
 	  var pom = document.createElement('a');
 	  pom.setAttribute('href', 'data:text/plain;charset=utf-8,' +
 			  encodeURIComponent(localStorage.getItem('sync_frame_T') + " " + localStorage.getItem('sync_frame_GP')));
@@ -233,21 +287,7 @@ function save(){
 	  pom.click();
 
 	  document.body.removeChild(pom);
-}
-
-function preview(){
-
-
+	  */
 }
 
 
-function calc_beg_frames(){
-	if(sync_frame_T < sync_frame_GP){
-		beg_frame_T = 0;
-		beg_frame_GP = sync_frame_GP - sync_frame_T;
-	}
-	else {
-		beg_frame_T = sync_frame_T - sync_frame_GP;
-		beg_frame_GP = 0;
-	}
-}

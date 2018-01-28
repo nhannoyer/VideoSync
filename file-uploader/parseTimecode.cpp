@@ -28,7 +28,7 @@ void saveData(InfoVideo * g,InfoVideo * r,InfoVideo * l, int fnbd)
   data += "<duration_l>" + l->getDuration() + "</duration_l>\n";
   data += "<timecode_l>" + l->getTimeCode() + "</timecode_l>\n";
   data += "<frameRate_l>" + std::to_string(l->getFrameRate()) + "</frameRate_l>\n";
-  data += "<diffNBframe_R-L>" + std::to_string(fnbd) + "</delayRL>\n";
+  data += "<delayRL>" + std::to_string(fnbd) + "</delayRL>\n";
   data += "</current_observation>";
 
   file << data;

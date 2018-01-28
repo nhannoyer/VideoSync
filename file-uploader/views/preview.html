@@ -4,8 +4,13 @@
 <head>
 	<meta charset="utf8">
 	<title>VideoPlayer</title>
+	<!-- 
 	<script type="text/javascript" src="javascript/controls.js"></script>
 	<link rel="stylesheet" href="css/display.css">
+	 -->
+	 <script type="text/javascript" src="../public/javascript/controls.js"></script>
+	<link rel="stylesheet" href="../public/css/display.css">
+	 
 </head>
 
 <body>
@@ -17,7 +22,10 @@
 <div id="sections">
 <section>
 	<video id="videoT">
+	<!-- 
 		<source src="uploads/Gvideo.mp4" type="video/mp4">
+		 -->
+		 <source src="../public/uploads/Gvideo.mp4" type="video/mp4">
 	</video>
 </section>
 
@@ -33,7 +41,10 @@
 
 <section><!--  GoPro -->
 	<video id="videoGP">
+	<!-- 
 		<source src="uploads/Lvideo.mp4" type="video/mp4">
+		 -->
+		<source src="../public/uploads/Lvideo.mp4" type="video/mp4">
 	</video>
 
 </section>
@@ -54,8 +65,12 @@
 </div>
 
 <footer>
-	<button id="save" onclick="save();">Save</button>
+	<!-- 
+	<button id="save" onclick="save(); location.href = '/synchro';">Save</button>
 	<button id="cancel" onclick="location.href = '/synchro';">Cancel</button>
+	 -->
+	 <button id="save" onclick="save(); location.href = 'player.html';">Save</button>
+	 <button id="cancel" onclick="location.href = 'player.html';">Cancel</button>
 </footer>
 
 
