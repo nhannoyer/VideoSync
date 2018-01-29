@@ -17,7 +17,6 @@ else
     then
       ./parser Rtimecode.txt Ltimecode.txt Gtimecode.txt $4
       rm $4
-      echo "rm"
     fi
 fi
 
