@@ -1,8 +1,10 @@
 Prerequisites
 
-  g++ for c++11
-  nodejs
-    package:
+  g++ for c++11,
+  
+  nodejs,
+  
+  node packages:
       express
       formidable
       fs
@@ -10,7 +12,7 @@ Prerequisites
 
 Installing
 
-  use 'npm install <package>' for node package
+  use 'npm install "package"' for node package
 
 Running
 
