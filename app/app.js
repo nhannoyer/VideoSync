@@ -13,7 +13,19 @@ app.get('/', function(req, res){
 
 app.get('/synchro', function(req, res){
   var file = fs.readdirSync('public/uploads',(err, files) => {  })
-  var g = 'public/uploads/' + file[0];
+
+  var i;
+  for (i=0;i<file.length;i++)
+  {
+    var ext = path.extname(file[i])
+    if (ext != '.mp4')
+    {
+      console.log(i);
+      break;
+    }
+
+  }
+  var g = 'public/uploads/' + file[i];
   var ext = path.extname(g)
 
   if (ext != '.mp4')
