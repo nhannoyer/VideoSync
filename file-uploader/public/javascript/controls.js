@@ -87,14 +87,14 @@ document.onkeypress=function(){
 
 function next_frame(v_index){
 	if(v_index == 1){
-		videoT.currentTime += localStorage.getItem('frameTimeT');
-	}
+		videoT.currentTime += parseFloat(localStorage.getItem('frameTimeT'));
+	}	
 	else if(v_index == 2){
-		videoGP.currentTime += localStorage.getItem('frameTimeGP');
+		videoGP.currentTime += parseFloat(localStorage.getItem('frameTimeGP'));
 	}
 	else if(v_index==3){
-		videoT.currentTime += localStorage.getItem('frameTimeT');
-		videoGP.currentTime += localStorage.getItem('frameTimeT');
+		videoT.currentTime += parseFloat(localStorage.getItem('frameTimeT'));
+		videoGP.currentTime += parseFloat(localStorage.getItem('frameTimeT'));
 	}
 	else{
 		alert("Error next_frame() : video index invalid");
@@ -103,14 +103,14 @@ function next_frame(v_index){
 
 function previous_frame(v_index){
 	if(v_index == 1){
-		videoT.currentTime -= localStorage.getItem('frameTimeT');
+		videoT.currentTime -= parseFloat(localStorage.getItem('frameTimeT'));
 	}
 	else if(v_index == 2){
-		videoGP.currentTime -= localStorage.getItem('frameTimeGP');
+		videoGP.currentTime -= parseFloat(localStorage.getItem('frameTimeGP'));
 	}
 	else if(v_index==3){
-		videoT.currentTime -= localStorage.getItem('frameTimeT');
-		videoGP.currentTime -= localStorage.getItem('frameTimeT');
+		videoT.currentTime -= parseFloat(localStorage.getItem('frameTimeT'));
+		videoGP.currentTime -= parseFloat(localStorage.getItem('frameTimeT'));
 	}
 	else{
 		alert("Error previous_frame() : video index invalid");
@@ -187,8 +187,8 @@ function set_sync_frames(){
 		document.getElementById("sync_frame_T").innerHTML = localStorage.getItem('sync_frame_T');
 		document.getElementById("sync_frame_GP").innerHTML = localStorage.getItem('sync_frame_GP');
 	}
-	
-	document.getElementById("videoID").innerHTML = localStorage.getItem('videoID'); 
+
+	document.getElementById("videoID").innerHTML = localStorage.getItem('videoID');
 }
 
 //updates the video current time with the slidebar
@@ -219,7 +219,7 @@ function get_start_end_frames(){
 	if(sync_time_T > sync_time_GP){
 		localStorage.setItem('start_frame_T', Math.round((sync_time_T - sync_time_GP)/localStorage.getItem('frameTimeT')));
 		localStorage.setItem('start_frame_GP', 0);
-		
+
 		if((videoT.duration - (sync_time_T - sync_time_GP)) < videoGP.duration){
 			localStorage.setItem('end_frame_T', Math.round(videoT.duration/localStorage.getItem('frameTimeT')));
 			localStorage.setItem('end_frame_GP', Math.round((videoT.duration - (sync_time_T - sync_time_GP))/localStorage.getItem('frameTimeGP')));
@@ -232,7 +232,7 @@ function get_start_end_frames(){
 	else{
 		localStorage.setItem('start_frame_T', 0);
 		localStorage.setItem('start_frame_GP', Math.round((sync_time_GP - sync_time_T)/localStorage.getItem('frameTimeGP')));
-		
+
 		if(videoT.duration < (videoGP.duration - (sync_time_GP - sync_time_T))){
 			localStorage.setItem('end_frame_T', Math.round(videoT.duration/localStorage.getItem('frameTimeT')));
 			localStorage.setItem('end_frame_GP', Math.round((videoT.duration + (sync_time_GP - sync_time_T))/localStorage.getItem('frameTimeGP')));
@@ -265,7 +265,7 @@ function readXML(xml){
 	localStorage.setItem('frameTimeGP', 1/( data.getElementsByTagName('current_observation')[0].getElementsByTagName('frameRate_l')[0].childNodes[0].nodeValue ));
 	localStorage.setItem('videoID', data.getElementsByTagName('current_observation')[0].getElementsByTagName('videoName')[0].childNodes[0].nodeValue);
 	localStorage.setItem('delayRL',data.getElementsByTagName('current_observation')[0].getElementsByTagName('delayRL')[0].childNodes[0].nodeValue);
-	
+
 
 }
 
@@ -274,10 +274,10 @@ function readXML(xml){
 function save(){
 
 	get_start_end_frames();
-	
+
 	var frameRateT = 1/localStorage.getItem('frameTimeT');
 	var frameRateGP = 1/localStorage.getItem('frameTimeGP');
-	
+
 	var delayRL = parseInt(localStorage.getItem('delayRL'));
 	if(delayRL <0){ //case where the delay between the two gopro videos is negative, we couldn't begin video_R before 0
 		var start_frame_G = parseInt(localStorage.getItem('start_frame_T')) - delayRL;
@@ -289,23 +289,23 @@ function save(){
 		var start_frame_L = localStorage.getItem('start_frame_GP');
 		var start_frame_R = parseInt(localStorage.getItem('start_frame_GP')) + delayRL;
 	}
-	
+
 	var synch_frame_R = parseInt(localStorage.getItem('sync_frame_GP')) + delayRL;
 	var end_frame_R = parseInt(localStorage.getItem('end_frame_GP')) + delayRL;
-	
+
 
 	var xmltext = "<informations><videoID>"+ localStorage.getItem('videoID') +" </videoID><frame_rate_G>" +
 		frameRateT + "</frame_rate_G><synch_frame_G>" +
 		localStorage.getItem('sync_frame_T') + "</synch_frame_G><start_frame_G>" +
-		start_frame_G + "</start_frame_G><end_frame_G>" + 
+		start_frame_G + "</start_frame_G><end_frame_G>" +
 		localStorage.getItem('end_frame_T') + "</end_frame_G><frame_rate_L>" +
 		frameRateGP + "</frame_rate_L><synch_frame_L>" +
 		localStorage.getItem('sync_frame_GP') + "</synch_frame_L><start_frame_L>" +
-		start_frame_L + "</start_frame_L><end_frame_L>" + 
+		start_frame_L + "</start_frame_L><end_frame_L>" +
 		localStorage.getItem('end_frame_GP') + "</end_frame_L><frame_rate_R>" +
 		frameRateGP + "</frame_rate_R><synch_frame_R>" +
 		synch_frame_R + "</synch_frame_R><start_frame_R>" +
-		start_frame_R + "</start_frame_R><end_frame_R>" + 
+		start_frame_R + "</start_frame_R><end_frame_R>" +
 		end_frame_R + "</end_frame_R></informations>";
 
 	alert(xmltext);

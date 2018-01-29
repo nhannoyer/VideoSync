@@ -1,15 +1,11 @@
 {
-  "name": "file-uploader",
-  "version": "1.0.0",
-  "description": "An AJAX file uploader using JS and NodeJS",
+  "name": "VideoSync",
+  "description": "An application to synchonize videos",
   "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Fady Makram",
-  "license": "MIT",
   "dependencies": {
     "express": "^4.13.3",
-    "formidable": "^1.0.17"
+    "formidable": "^1.0.17",
+    "fs": ,
+    "path":
   }
 }

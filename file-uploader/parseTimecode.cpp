@@ -37,7 +37,7 @@ void saveData(InfoVideo * g,InfoVideo * r,InfoVideo * l, int fnbd)
 
 
 
-void InfoVideo::parse()
+void InfoVideo::parse(std::string name)
 {
   std::ifstream file(this->_fileName);
   if (!file)
@@ -47,8 +47,6 @@ void InfoVideo::parse()
   }
 
   std::string lines;
-  std::string name;
-  name.reserve(20);
   std::string t;
   t.reserve(11);
   std::string d;
@@ -57,21 +55,6 @@ void InfoVideo::parse()
   fr.reserve(5);
   while (file) {
     file >> lines;
-    if (lines == "from")
-    {
-      file >> name;
-      int posBegin = name.find('/')+1;
-      while (1)
-          {
-            int test = name.find('/',posBegin);
-            if (test == -1)
-              break;
-            else
-              posBegin = test+1;
-            }
-      int posEnd = name.find('\'',1);
-      name = name.substr(posBegin,posEnd-posBegin);
-    }
     if (lines == "timecode")
     {
       file >> t;
@@ -98,16 +81,29 @@ int main(int argc, char * argv[])
 {
   if (argc < 3)
   {
-    std::cerr << "Usage : ./parser <R video file> <L video file> <G video file>" << '\n';
+    std::cerr << "Usage : ./parser <R video file> <L video file> <G video file> <G video file" << '\n';
     return -1;
   }
+  std::string name = argv[4];
+  int posBegin = 0;
+  while (1)
+      {
+        int test = name.find('/',posBegin);
+        if (test == -1)
+          break;
+        else
+          posBegin = test+1;
+      }
+  int posEnd = name.find('.',1);
+  name = name.substr(posBegin,posEnd-posBegin);
+
   InfoVideo gVideo(argv[3]);
   InfoVideo rVideo(argv[1]);
   InfoVideo lVideo(argv[2]);
 
-  gVideo.parse();
-  rVideo.parse();
-  lVideo.parse();
+  gVideo.parse(name);
+  rVideo.parse(name);
+  lVideo.parse(name);
 
   int hr,hl,mr,ml,sr,sl,fr,fl;
   if (rVideo.getTimeCode().size() != 0 && lVideo.getTimeCode().size() != 0)

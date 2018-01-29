@@ -3,7 +3,6 @@ var app = express();
 var path = require('path');
 var formidable = require('formidable');
 var fs = require('fs');
-var xml2js = require('xml2js');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -11,9 +10,18 @@ app.get('/', function(req, res){
   res.sendFile(path.join(__dirname, 'views/upload.html'));
 });
 
+
 app.get('/synchro', function(req, res){
-  const spawn = require('child_process').spawn;
-  const shinfo = spawn('sh',['info.sh', 'public/uploads/Rvideo.mp4', 'public/uploads/Lvideo.mp4', 'public/uploads/Gvideo.mp4']);
+  var file = fs.readdirSync('public/uploads',(err, files) => {  })
+  var g = 'public/uploads/' + file[0];
+  var ext = path.extname(g)
+
+  if (ext != '.mp4')
+  {
+    console.log(ext);
+      const spawn = require('child_process').spawn;
+      const shinfo = spawn('sh',['info.sh', 'public/uploads/Rvideo.mp4', 'public/uploads/Lvideo.mp4','public/uploads/Gvideo.mp4', g]);
+  }
 
   res.sendFile(path.join(__dirname, 'views/player.html'));
 });
@@ -23,6 +31,7 @@ app.get('/preview', function(req, res){
 });
 
 app.post('/upload', function(req, res){
+
   // create an incoming form object
   var form = new formidable.IncomingForm();
 
@@ -31,7 +40,6 @@ app.post('/upload', function(req, res){
 
   // store all uploads in the /uploads directory
   form.uploadDir = path.join(__dirname, '/public/uploads');
-
   // every time a file has been uploaded successfully,
   // rename it to it's orignal name
   form.on('file', function(field, file) {

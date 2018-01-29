@@ -6,7 +6,7 @@ class InfoVideo
 {
 public:
   InfoVideo(char * fileName);
-  void parse();
+  void parse(std::string name);
   float getDelay() {return _delay;}
   void setDelay(float delay){_delay=delay;}
   float getFrameRate(){return _frameRate;}
