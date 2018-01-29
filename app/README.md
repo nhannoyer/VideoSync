@@ -16,7 +16,7 @@ Installing
 
 Running
 
-  exec the script 'startServer' (preresuisites: firefox)
+  exec the script 'startServer' (prerequisites: firefox)
 
   or
 
