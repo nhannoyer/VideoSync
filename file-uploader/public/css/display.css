@@ -2,6 +2,7 @@ body{
 	background-color : rgb(170,170,170);
 	font-family : Arial;
 	color: navy;
+	font-size: 20px;
 }
 
 
@@ -9,16 +10,19 @@ body{
 	display :flex;
 	flex-direction : row;
 	flex-wrap : wrap;
+	justify-content: flex-around;
 }
 
 
 section{
 	width : 45%;
-	height : 60%;
+	height : 55%;
 	margin : 10px;
 	display :flex;
 	flex-direction: column;
 	min-width : 800px;
+	align-items: space-around;
+
 }
 
 header{
@@ -33,9 +37,19 @@ header{
 	
 }
 
+#tobii img, #gopro img{
+	width : 20%;
+	height : 20%;
+}
+
+
 footer{
 	display:flex;
 	justify-content : center;
+}
+
+#home_footer{
+	margin-left : 10%;
 }
 
 #controls{
@@ -80,23 +94,8 @@ button{
 
 }
 
-#sync_controls button{
-	height: 40px;
-	width: 80px;
-	margin: 2px;
-	margin-top : 5px;
-	
-	border:none;
-	padding:6px 0 6px 0;
-	border-radius:2px;
-	box-shadow:2px 2px 5px #000;
-	background:rgb(200,200,200);
-	font:bold 13px Arial;
-	color:#444;
-}
 
-
-footer button{
+footer button, #home_footer button, #sync_controls button{
 	height: 40px;
 	width: 80px;
 	margin: 2px;
@@ -111,6 +110,8 @@ footer button{
 	color:#444;
 
 }
+
+
 
 #play{
 	background-image : url("button/play.png");

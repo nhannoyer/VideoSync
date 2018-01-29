@@ -4,33 +4,33 @@
 <head>
 	<meta charset="utf8">
 	<title>VideoPlayer</title>
-<!-- 
+
 	<script type="text/javascript" src="javascript/controls.js"></script>
 	<link rel="stylesheet" href="css/display.css">
-	-->
+	  <!--
 	 <script type="text/javascript" src="../public/javascript/controls.js"></script>
 	<link rel="stylesheet" href="../public/css/display.css">
+	-->
 </head>
 
 <body onload="loadXML(); set_sync_frames();">
 
 <header>
-	<div id="title"><h1>VideoID:<span id="videoID"></span></h1></div>
-	<!-- 
+	<div id="title"><h1>VideoID:<span id="videoID"></span></h1></div> 
 	<div id="logo"><img src="css/img/logo.png" alt="logo"></div>
-	 -->
+	<!--
 	<div id="logo"><img src="../public/css/img/logo.png" alt="logo"></div>
+	-->
 </header>
 
 <div id="sections">
 <section><!-- tobi video section  -->
 <h1>Glasses</h1>
 <video id="videoT">
-
-<!-- 
 	<source src="uploads/Gvideo.mp4" type="video/mp4">
--->
+<!--
 	 <source src="../public/uploads/Gvideo.mp4" type="video/mp4">
+-->
 </video>
 
 <script type="text/javascript">
@@ -69,10 +69,11 @@
 <section><!-- GoPro video section  -->
 <h1>GoPro</h1>
 <video id="videoGoPro">
-<!-- 
+ 
 	<source src="uploads/Lvideo.mp4" type="video/mp4">
--->
+<!--
 	<source src="../public/uploads/Lvideo.mp4" type="video/mp4">
+	-->
 </video>
 
 <script type="text/javascript">
@@ -114,23 +115,18 @@
 
 
 <footer><!-- Save button section  -->
-<!-- 
-	<button id="back_home" onclick="location.href='/';">Home</button>
+
+	<button id="back_home" onclick="reset(); location.href='/';">Home</button>
 	<button id="save" onclick="save();">Save</button>
 	<button id="preview" onclick=" location.href='/preview';">Preview</button>
-	 -->
+<!--
 	<button id="back_home" onclick="reset(); location.href='upload.html';">Home</button>
 	<button id="save" onclick=" save();">Save</button>
 	<button id="preview" onclick=" location.href='preview.html';">Preview</button>
+	-->
 </footer>
 
 
-<!-- 
-<script type="text/javascript">
-	document.getElementById("sync_frame_T").innerHTML = localStorage.getItem('sync_frame_T');
-	document.getElementById("sync_frame_GP").innerHTML = localStorage.getItem('sync_frame_GP');
-</script>
--->
 
 </body>
 </html>

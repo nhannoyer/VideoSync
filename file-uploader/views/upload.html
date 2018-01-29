@@ -6,19 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>File Uploader</title>
-  <!-- 
+  
   <link href="css/display.css" rel="stylesheet">
--->
+	<!--
    <link href="../public/css/display.css" rel="stylesheet">
+   -->
 </head>
 <body>
 
   <header>
     <div id="title"><h1>Synchro in the Wild</h1></div>
-	<!-- 
+	 
 	<div id="logo"><img src="css/img/logo.png" alt="logo"></div>
-	 -->
+
+	 <!--
 	<div id="logo"><img src="../public/css/img/logo.png" alt="logo"></div>
+	-->
   </header>
 
 <div id="sections">
@@ -49,31 +52,40 @@
   </section>
 
  <section>
+ <div id="help">
  	How to synchronize the three videos :</br>
- 		- upload tobii glasses, left GoPro and right GoPro videos</br>
- 		- press start</br>
- 		- select a synchronization point for each video (ex: contact point)</br>
+ 	<ol>
+ 		<li>upload tobii glasses, left GoPro and right GoPro videos</li>
+ 		<li>press "start videos" button</li>
+ 		<li>select a synchronization point for each video (ex: contact point)</li>
+ 		<li>save the data in an XML file</li>
+ 	</ol>
+ </div>
  		
- 	<!-- 
+ 	 
 	<div id="tobii"><img src="css/img/tobii2.png" alt="tobii"></div>
-	 -->
-	<div id="tobii"><img src="../public/css/img/tobbi2.JPG" alt="tobii"></div>
- 
+	<div id="gopro"><img src="css/img/gopro.JPG" alt="gp"></div>
+	<!--
+	<div id="tobii"><img src="../public/css/img/tobii2.JPG" alt="tobii"> <img src="../public/css/img/logo_tobii.png" alt="tobiilogo"></div>
+	<div id="gopro"><img src="../public/css/img/gopro.JPG" alt="gp"> <img src="../public/css/img/gopro_logo.png" alt="goprologo"></div>
+ -->
  </section>
 
 
 </div>
-  <footer>
-  <!-- 
+  <div id="home_footer">
+ 
       <button id="synchro" onclick="location.href='/synchro';">Start videos</button>
--->
-      <button id="synchro" onclick="location.href='player.html';">Start videos</button>
-  </footer>
-  <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-  <!-- 
-  <script src="javascript/upload.js"></script>
- -->
- <script src="../public/javascript/upload.js"></script>
 
+<!--
+      <button id="synchro" onclick="location.href='player.html';">Start videos</button>
+      -->
+  </div>
+  <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+  <script src="javascript/upload.js"></script>
+
+   <!--
+ <script src="../public/javascript/upload.js"></script>
+-->
 </body>
 </html>
