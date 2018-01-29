@@ -88,7 +88,7 @@ document.onkeypress=function(){
 function next_frame(v_index){
 	if(v_index == 1){
 		videoT.currentTime += parseFloat(localStorage.getItem('frameTimeT'));
-	}	
+	}
 	else if(v_index == 2){
 		videoGP.currentTime += parseFloat(localStorage.getItem('frameTimeGP'));
 	}
@@ -308,7 +308,6 @@ function save(){
 		start_frame_R + "</start_frame_R><end_frame_R>" +
 		end_frame_R + "</end_frame_R></informations>";
 
-	alert(xmltext);
 
 
 	var bb = new Blob([xmltext], {type: 'text/plain'});
