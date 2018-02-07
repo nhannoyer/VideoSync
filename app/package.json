@@ -5,7 +5,11 @@
   "dependencies": {
     "express": "^4.13.3",
     "formidable": "^1.0.17",
-    "fs": ,
-    "path":
-  }
+    "fs": "^0.0.1-security",
+    "path" : "^0.12.7"
+  },
+  "repository":{
+    "private": true
+  },
+  "license": "UNLICENSED"
 }
