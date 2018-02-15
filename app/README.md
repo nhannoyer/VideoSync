@@ -20,7 +20,7 @@ Running
 
   or
 
-  run the command 'nodejs app.js' and access pages from the localhost with port 8080.
+  run the command 'nodejs app.js' and access pages from the localhost with port 3000.
 
   Authors
     Alexandre Hervé
